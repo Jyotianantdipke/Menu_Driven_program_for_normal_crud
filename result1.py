@@ -154,7 +154,7 @@ while True:
                     if address in citydict.keys():
                         add1=[address,citydict[address]]
                         s1.set_address(add1)
-
+                    print("type of address ",type(s1.get_address()))
                     studentdict.update({s1.get_rn():[s1.get_name(),s1.get_marks(),s1.get_address()]})
                     
 
@@ -204,10 +204,11 @@ while True:
                                 except (InvalidInput) as e:
                                     print(e)
                             for k,v in studentdict.items():
-                                for k1,v1 in citydict.items():
-                                    if k1==new_address:
-                                        v[2][0]=new_address
-                                        v[2][1]=citydict[k1]                       
+                                if k==rn:
+                                    for k1,v1 in citydict.items():
+                                        if k1==new_address:
+                                            v[2][0]=new_address
+                                            v[2][1]=citydict[k1]                       
                                 
 
                             
