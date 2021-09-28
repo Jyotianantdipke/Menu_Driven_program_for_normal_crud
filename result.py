@@ -16,13 +16,13 @@ def check_avalability(pin):
         if i.get_pincode()==pin:
             raise InvalidInput("this pincode is available already")
     else:
-        return pin
+         return pin
 
 
 def check_avalability_rn(rn):
     for i in studentlist:
         if i.get_rn()==rn:
-            raise InvalidInput("this pincode is available already")
+            raise InvalidInput("this Roll no is available already")
     else:
         return rn
 
@@ -90,7 +90,7 @@ while True:
             if ch1==1:
                 while True:
                     try:
-                        no_of_address=int(input("Enter no of cities u want to add : "))
+                        no_of_address=int(input("\nEnter no of cities u want to add : "))
                         break
                     except ValueError as e:
                         print(e)
@@ -121,14 +121,14 @@ while True:
                 else:
                     while True:
                         try:
-                            pin=check_pincode(int(input("Enter pincode u want to change: ")))
+                            pin=check_pincode(int(input("\nEnter pincode u want to change: ")))
                             print(type(pin))
                             break
                         except (InvalidInput) as e:
                             print(e)
                     
                     for i in Addresslist:
-                        print(i.get_pincode(),i.get_city())
+##                        print(i.get_pincode(),i.get_city())
                         if i.get_pincode()==pin:
                             while True:
                                 try:
@@ -140,23 +140,29 @@ while True:
                     print(Addresslist)
                     print()
             elif ch1==3:
+                if len(Addresslist)==0:
+                    print("No addresses Available ")
+                else:
                     while True:
                         try:
-                            pin=check_pincode(int(input("Enter pincode u want to delete: ")))
+                            pin=check_pincode(int(input("\nEnter pincode u want to delete: ")))
                             print(pin)
                             break
                         except (InvalidInput) as e:
                             print(e)
                  
                     for i in Addresslist:
-                        if i.get_rn()==pin:
+                        if i.get_pincode()==pin:
                             Addresslist.remove(i)
                     print()
 
             elif ch1==4:
-                for i in Addresslist:
-                    print(i)
-                print()
+                if len(Addresslist)==0:
+                    print("No Addresses Available ")
+                else:
+                    for i in Addresslist:
+                        print(i)
+                    print()
 
             elif ch1==5:
                 break
@@ -188,7 +194,7 @@ while True:
                     print()
                     while True:
                         try:
-                            pin=add_pincode_check(int(input("Enter pincode of city : ")))
+                            pin=add_pincode_check(int(input("\nEnter pincode of city : ")))
                             break
                         except (ValueError,InvalidInput) as e:
                             print(e)
@@ -206,7 +212,7 @@ while True:
                     print()
                 while True:
                     try:
-                        no_of_students=int(input("Enter no of student u want to add: "))
+                        no_of_students=int(input("\nEnter no of student u want to add: "))
                         break
                     except ValueError as e:
                         print(e)
@@ -214,7 +220,7 @@ while True:
                     s1=Student()
                     while True:
                         try:
-                            rn=check_avalability_rn(int(input("Enter Roll no: ")))
+                            rn=check_avalability_rn(int(input("\nEnter Roll no: ")))
                             break
                         except (ValueError,InvalidInput) as e:
                             print(e)
@@ -246,6 +252,7 @@ while True:
                     print(type(s1.address))
                     print()
                     studentlist.append(s1)
+                    
                     print()
             elif ch1==2:
                 if len(studentlist)==0:
@@ -254,7 +261,7 @@ while True:
                 else:
                     while True:
                         try:
-                            rn=int(input("Enter roll no u want to update the data: "))
+                            rn=int(input("\nEnter roll no u want to update the data: "))
                             break
                         except ValueError as e:
                             print(e)
@@ -281,7 +288,7 @@ while True:
                             
                         print()
                         if ch2==1:
-                            new_name=check_String(input("Enter New name: "))
+                            new_name=input("Enter New name: ")
                             for i in studentlist:
                                 if i.get_rn()==rn:
                                     i.set_name(new_name)
@@ -322,7 +329,7 @@ while True:
                 else:
                     while True:
                         try:
-                            rn=int(input("Enter roll no u want to update the data: "))
+                            rn=int(input("Enter roll no u want to delete the data: "))
                             break
                         except ValueError as e:
                             print(e)
@@ -345,16 +352,20 @@ while True:
 
 
             elif ch1==5:
-                marks_list=set()
-                for i in studentlist:
-                    marks_list.add(i.get_marks())
+                if len(studentlist)==0:
+                    print("No students Available ")
+                    print()
+                else:
+                    marks_list=set()
+                    for i in studentlist:
+                        marks_list.add(i.get_marks())
+                        
+                    new_list=sorted(list(marks_list))
                     
-                new_list=sorted(list(marks_list))
-                
-                for i in reversed(new_list):
-                    for j in studentlist:
-                        if i==j.get_marks():
-                            print(j)
+                    for i in reversed(new_list):
+                        for j in studentlist:
+                            if i==j.get_marks():
+                                print(j)
 
                 print()
 
